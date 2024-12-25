@@ -1,6 +1,6 @@
 ---
 title: "Japan"
-description: "Pagination works regardless of folder name."
+description: "Пожилой тест."
 date: "2024-11-21"
 tags:
   - travel
