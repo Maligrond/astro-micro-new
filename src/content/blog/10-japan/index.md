@@ -1,12 +1,15 @@
 ---
-title: "Draft example"
+title: "Japan"
 description: "Setting draft flag to true to hide this post."
-date: "2022-12-31"
+date: "2024-12-31"
 draft: false
 tags:
-  - example
+  - travel
 ---
 
-This post also demonstrates the year sorting capabilities.
+# Путешествие в Японию
+## Апрель 2025
 
-Try setting this file's metadata to `draft: true`.
+Join the room, introduce yourself and find out how you can help out.
+
+![Tokyo Tower](./japan1.jpg)
