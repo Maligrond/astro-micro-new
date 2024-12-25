@@ -13,4 +13,4 @@ tags:
 
 Join the room, introduce yourself and find out how you can help out.
 
-![Tokyo Tower](./japan1.jpg)
+
