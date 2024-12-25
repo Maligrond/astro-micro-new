@@ -3,9 +3,12 @@ title: "Japan"
 description: "Pagination works regardless of folder name."
 date: "2024-11-21"
 tags:
-  - example
+  - travel
 ---
 
-This post should show up in proper chronological order even though its folder comes last in the `content/blog` directory.
+# Путешествие в Японию
+## Апрель 2025
 
-The `Previous Post` and `Next Post` buttons under each blog post should also keep the proper chronological order, based on the frontmatter `date` field.
+Join the room, introduce yourself and find out how you can help out.
+
+![Tokyo Tower](./japan1.jpg)
