@@ -10,5 +10,4 @@ tags:
 
 ## Потому что
 
-
 ![[cp2077_game-thumbnail.jpg]]
