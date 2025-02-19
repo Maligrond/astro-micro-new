@@ -1,45 +1,103 @@
 ---
-title: "Astro Huy"
-description: "Astro Micro is an accessible and lightweight blog."
-date: "2024-05-26"
-demoURL: "https://astro-micro.vercel.app"
-repoURL: "https://github.com/trevortylerlee/astro-micro"
+title: "Посещенные страны"
+description: "и города"
+date: "2025-02-19"
 ---
 
-![Astro Micro](/astro-micro.jpg)
+# Посещённые города
 
-Astro Micro is an accessible theme for Astro. It's a fork of Mark Horn's popular theme Astro Nano. Like Nano, Micro comes with zero frameworks installed.
+## 🇧🇪 Бельгия  
+- **Брюгге**  
 
-Micro adds features like [Pagefind](https://pagefind.app) for search, [Giscus](https://giscus.app) for comments, and more. For a full list of changes, see this [blog post](/blog/00-micro-changelog).
+## 🇧🇬 Болгария  
+- **Бургас**  
+- **София**  
 
-Micro still comes with everything great about Nano — full type safety, a sitemap, an RSS feed, and Markdown + MDX support. Styled with TailwindCSS and preconfigured with system, light, and dark themes.
+## 🇬🇧 Великобритания  
+- **Лондон**  
 
-Visit [Astro Micro on Github](https://github.com/trevortylerlee/astro-micro) to get started.
+## 🇻🇦 Ватикан  
+- **Ватикан**  
 
-## 🚀 Deploy your own
+## 🇩🇪 Германия  
+- **Берлин**  
+- **Дрезден**  
+- **Герлиц**  
+- **Лейпциг**  
+- **Мюнхен**  
+- **Франкфурт**  
+- **Штутгарт**  
 
-<div class="flex gap-2">
-  <a target="_blank" aria-label="Deploy with Vercel" href="https://vercel.com/new/clone?repository-url=https://github.com/trevortylerlee/astro-micro">
-    <img src="/deploy_vercel.svg" />
-  </a>
-  <a target="_blank" aria-label="Deploy with Netlify" href="https://app.netlify.com/start/deploy?repository=https://github.com/trevortylerlee/astro-micro">
-    <img src="/deploy_netlify.svg" />
-  </a>
-</div>
+## 🇪🇸 Испания  
+- **Аликанте**  
+- **Барселона**  
+- **Валенсия**  
+- **Логроньо**  
+- **Мурсия**  
+- **Памплона**  
 
-## 📋 Features
+## 🇮🇹 Италия  
+- **Генуя**  
+- **Милан**  
+- **Неаполь**  
+- **Пиза**  
+- **Помпеи**  
+- **Рапалло**  
+- **Рим**  
+- **Флоренция**  
+- **Венеция**  
 
-Everything in [Astro Nano](https://github.com/markhorn-dev/astro-nano) plus:
+## 🇨🇦 Канада  
+- **Джаспер**  
+- **Калгари**  
+- **Ред-Дир**  
+- **Эдмонтон**  
 
-- Pagefind search
-- Giscus comments
-- Callout component
-- Table of contents component
-- Pagination component
-- 404 page
+## 🇳🇱 Нидерланды  
+- **Амстердам**  
 
-and [more](/blog/00-micro-changelog).
+## 🇲🇨 Монако  
+- **Монако**  
 
-## 💯 Lighthouse score
+## 🇵🇱 Польша  
+- **Варшава**  
+- **Вроцлав**  
+- **Еленя-Гура**  
 
-![Astro Nano Lighthouse Score](/astro-nano-lighthouse.jpg)
+## 🇨🇿 Чехия  
+- **Прага**  
+
+## 🇹🇷 Турция  
+- **Аланья**  
+- **Анкара**  
+- **Анталья**  
+- **Стамбул**  
+
+## 🇺🇦 Украина  
+- **Днепр**  
+- **Запорожье**  
+- **Киев**  
+- **Львов**  
+- **Мелитополь**  
+- **Харьков**  
+- **Ялта**  
+
+## 🇺🇸 США  
+- **Джерси-Сити**  
+- **Лос-Анджелес**  
+- **Нью-Йорк**  
+
+## 🇫🇷 Франция  
+- **Ницца**  
+- **Париж**  
+- **Страсбург**  
+
+## 🇩🇰 Дания  
+- **Копенгаген**  
+
+## 🇯🇵 Япония  
+- **Киото**  
+- **Токио**  
+
+## 🇸🇪 Швеция  
+- **Мальме**  
