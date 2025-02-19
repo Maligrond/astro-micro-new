@@ -1,7 +1,7 @@
 ---
-title: "Посещенные страны"
-description: "и города"
-date: "2025-02-19"
+title: "hui"
+description: "huihui"
+date: "2025-02-18"
 ---
 
 # Посещённые города
