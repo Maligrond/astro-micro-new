@@ -1,6 +1,6 @@
 ---
 title: Посещенные страны и города
-description: 
+description: я увидел мир
 date: 2025-02-19
 tags:
   - путешествия
