@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About Me">
+  <main class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-8">About Me</h1>
+    
+    <div class="prose prose-lg">
+      <div class="mb-8">
+        <img 
+          src="/your-photo.jpg" 
+          alt="Your Name" 
+          class="rounded-lg w-64 h-64 object-cover"
+        />
+      </div>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Hello, I'm [Your Name]! 👋</h2>
+        <p class="mb-4">
+          [Write a brief introduction about yourself, your background, and what you do]
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">What I Do</h2>
+        <ul class="list-disc pl-6">
+          <li>[Your primary skill/occupation]</li>
+          <li>[Another area of expertise]</li>
+          <li>[Something else you're passionate about]</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Connect With Me</h2>
+        <div class="flex gap-4">
+          <a href="https://twitter.com/yourusername" class="text-blue-600 hover:text-blue-800">Twitter</a>
+          <a href="https://github.com/yourusername" class="text-blue-600 hover:text-blue-800">GitHub</a>
+          <a href="https://linkedin.com/in/yourusername" class="text-blue-600 hover:text-blue-800">LinkedIn</a>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout> 
