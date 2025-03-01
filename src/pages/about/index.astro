@@ -1,15 +1,15 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { Content as AboutContent } from './about.mdx';
+import Container from "@components/Container.astro";
+import { Content as AboutContent } from './index.mdx';
 ---
 
-<Layout 
-  title="Обо мне"
-  description="Узнайте больше обо мне и моей работе"
->
-  <article class="mx-auto max-w-3xl w-full px-4 py-6">
-    <div class="prose prose-lg dark:prose-invert">
-      <AboutContent />
+<Layout title="Обо мне" description="Немного информации обо мне">
+  <Container>
+    <div class="space-y-16">
+      <article class="prose prose-lg dark:prose-invert">
+        <AboutContent />
+      </article>
     </div>
-  </article>
-</Layout> 
+  </Container>
+</Layout>
