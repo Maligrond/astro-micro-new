@@ -4,15 +4,16 @@ import Container from "@components/Container.astro";
 import BackToPrevious from "@components/BackToPrevious.astro";
 
 const { frontmatter } = Astro.props;
-const isAboutPage = Astro.url.pathname === '/about';
+
+// Get current path and remove last segment for the back link
+const currentPath = Astro.url.pathname;
+const parentPath = currentPath.split('/').slice(0, -1).join('/') || '/';
 ---
 
 <Layout title={frontmatter.title} description={frontmatter.description}>
   <Container>
     <div class="animate">
-      {!isAboutPage && (
-        <BackToPrevious href="/about">Назад</BackToPrevious>
-      )}
+      <BackToPrevious href={parentPath}>Назад</BackToPrevious>
     </div>
     <article class="prose prose-lg dark:prose-invert max-w-none mt-10">
       <slot />
