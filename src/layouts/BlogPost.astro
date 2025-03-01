@@ -4,12 +4,15 @@ import Container from "@components/Container.astro";
 import BackToPrevious from "@components/BackToPrevious.astro";
 
 const { frontmatter } = Astro.props;
+const isAboutPage = Astro.url.pathname === '/about';
 ---
 
 <Layout title={frontmatter.title} description={frontmatter.description}>
   <Container>
     <div class="animate">
-      <BackToPrevious href="/about">Назад</BackToPrevious>
+      {!isAboutPage && (
+        <BackToPrevious href="/about">Назад</BackToPrevious>
+      )}
     </div>
     <article class="prose prose-lg dark:prose-invert max-w-none mt-10">
       <slot />
