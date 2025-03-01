@@ -9,12 +9,12 @@ import BackToPrevious from "@components/BackToPrevious.astro";
   title="Мои любимые книги"
   description="Книги, которые я рекомендую прочитать"
 >
-  <Container>
+  <article class="mx-auto max-w-3xl w-full px-4 py-6">
     <div class="animate">
       <BackToPrevious href="/about">Назад</BackToPrevious>
     </div>
-    <article class="animate mt-10">
+    <div class="prose prose-lg dark:prose-invert">
       <BooksContent />
-    </article>
-  </Container>
-</Layout> 
+    </div>
+  </article>
+</Layout>
