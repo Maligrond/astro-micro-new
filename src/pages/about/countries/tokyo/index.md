@@ -1,9 +1,7 @@
 ---
-title: Япония
-description: Архив фото
-date: 2024-11-21
-tags:
-  - travel
+layout: "../../../../layouts/BlogPost.astro"
+title: "Токио"
+description: "Столица Японии"
 ---
 
 ![фото](PXL_20240423_064259909.jpg "текст под")
