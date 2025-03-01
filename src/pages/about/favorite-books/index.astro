@@ -13,8 +13,19 @@ import { Content as BooksContent } from './index.mdx';
     <div class="animate">
       <BackToPrevious href="/about">Назад</BackToPrevious>
     </div>
-    <article class="animate mt-10 prose prose-lg dark:prose-invert max-w-none">
-      <BooksContent />
-    </article>
+    <div class="content-wrapper">
+      <article class="animate mt-10 prose prose-lg dark:prose-invert prose-headings:text-black dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300">
+        <BooksContent />
+      </article>
+    </div>
   </Container>
 </Layout>
+
+<style>
+  .content-wrapper :global(h1) {
+    margin-bottom: 2rem;
+  }
+  .content-wrapper :global(h2) {
+    margin-top: 2rem;
+  }
+</style>
