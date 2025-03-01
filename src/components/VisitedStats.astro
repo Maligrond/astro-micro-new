@@ -1,0 +1,39 @@
+---
+// Этот компонент будет анализировать DOM после рендеринга
+// и подсчитывать количество стран и городов
+---
+
+<div id="visited-stats" class="flex flex-wrap gap-4 mb-8">
+  <div class="bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-lg">
+    <span class="font-medium" id="countries-count">0</span> стран
+  </div>
+  <div class="bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-lg">
+    <span class="font-medium" id="cities-count">0</span> городов
+  </div>
+</div>
+
+<script>
+  // Функция для подсчета стран и городов
+  function countVisitedPlaces() {
+    // Находим все заголовки стран (h3)
+    const countryElements = document.querySelectorAll('h3');
+    const countriesCount = countryElements.length;
+    
+    // Находим все параграфы с городами
+    const cityParagraphs = document.querySelectorAll('h3 + p');
+    let citiesCount = 0;
+    
+    // Подсчитываем города, разделенные запятыми
+    cityParagraphs.forEach(paragraph => {
+      const cities = paragraph.textContent.split(',').map(city => city.trim()).filter(city => city);
+      citiesCount += cities.length;
+    });
+    
+    // Обновляем счетчики
+    document.getElementById('countries-count').textContent = countriesCount;
+    document.getElementById('cities-count').textContent = citiesCount;
+  }
+  
+  // Запускаем подсчет после загрузки страницы
+  document.addEventListener('DOMContentLoaded', countVisitedPlaces);
+</script> 
