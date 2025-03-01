@@ -1,6 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import { Content as BooksContent } from './index.mdx';
+import Container from "@components/Container.astro";
 import BackToPrevious from "@components/BackToPrevious.astro";
 ---
 
@@ -8,12 +9,14 @@ import BackToPrevious from "@components/BackToPrevious.astro";
   title="Мои любимые книги"
   description="Книги, которые я рекомендую прочитать"
 >
-  <article class="mx-auto max-w-3xl w-full px-4 py-6">
-    <div class="animate">
-      <BackToPrevious href="/about">Назад</BackToPrevious>
-    </div>
-    <div class="prose prose-lg dark:prose-invert">
-      <BooksContent />
-    </div>
-  </article>
+  <Container>
+    <article class="w-full">
+      <div class="animate">
+        <BackToPrevious href="/about">Назад</BackToPrevious>
+      </div>
+      <div class="prose prose-neutral prose-lg dark:prose-invert">
+        <BooksContent />
+      </div>
+    </article>
+  </Container>
 </Layout>
