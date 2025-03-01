@@ -1,0 +1,30 @@
+---
+import Layout from "./Layout.astro";
+import Container from "@components/Container.astro";
+import BackToPrevious from "@components/BackToPrevious.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title} description={frontmatter.description}>
+  <Container>
+    <div class="animate">
+      <BackToPrevious href="/about">Назад</BackToPrevious>
+    </div>
+    <article class="prose prose-lg dark:prose-invert max-w-none mt-10">
+      <slot />
+    </article>
+  </Container>
+</Layout>
+
+<style is:global>
+  .prose h1 {
+    @apply mb-8;
+  }
+  .prose h2 {
+    @apply mt-8 mb-4;
+  }
+  .prose p {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+</style>
