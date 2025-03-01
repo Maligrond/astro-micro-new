@@ -1,0 +1,20 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { Content as MoviesContent } from './movies.mdx';
+import Container from "@components/Container.astro";
+import BackToPrevious from "@components/BackToPrevious.astro";
+---
+
+<Layout 
+  title="Мои любимые фильмы"
+  description="Фильмы, которые оставили след в моей жизни"
+>
+  <Container>
+    <div class="animate">
+      <BackToPrevious href="/about">Назад</BackToPrevious>
+    </div>
+    <article class="animate mt-10">
+      <MoviesContent />
+    </article>
+  </Container>
+</Layout> 

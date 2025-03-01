@@ -1,0 +1,20 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { Content as ShowsContent } from './shows.mdx';
+import Container from "@components/Container.astro";
+import BackToPrevious from "@components/BackToPrevious.astro";
+---
+
+<Layout 
+  title="Мои любимые сериалы"
+  description="Сериалы, которые я рекомендую посмотреть"
+>
+  <Container>
+    <div class="animate">
+      <BackToPrevious href="/about">Назад</BackToPrevious>
+    </div>
+    <article class="animate mt-10">
+      <ShowsContent />
+    </article>
+  </Container>
+</Layout> 

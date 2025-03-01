@@ -1,0 +1,20 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { Content as AlbumsContent } from './albums.mdx';
+import Container from "@components/Container.astro";
+import BackToPrevious from "@components/BackToPrevious.astro";
+---
+
+<Layout 
+  title="Мои любимые альбомы"
+  description="Музыка, которая меня вдохновляет"
+>
+  <Container>
+    <div class="animate">
+      <BackToPrevious href="/about">Назад</BackToPrevious>
+    </div>
+    <article class="animate mt-10">
+      <AlbumsContent />
+    </article>
+  </Container>
+</Layout> 
