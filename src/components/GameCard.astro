@@ -1,0 +1,45 @@
+---
+interface Props {
+  title: string;
+  icon: string;
+  href?: string;
+}
+
+const { title, icon, href } = Astro.props;
+---
+
+<div class="game-card">
+  {href ? (
+    <a href={href} class="game-link">
+      <span class="icon">{icon}</span>
+      <span class="title">{title}</span>
+    </a>
+  ) : (
+    <div class="game-content">
+      <span class="icon">{icon}</span>
+      <span class="title">{title}</span>
+    </div>
+  )}
+</div>
+
+<style>
+  .game-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg p-4 hover:shadow-lg transition-shadow;
+  }
+
+  .game-link {
+    @apply flex items-center no-underline text-gray-800 dark:text-gray-200;
+  }
+
+  .game-content {
+    @apply flex items-center text-gray-800 dark:text-gray-200;
+  }
+
+  .icon {
+    @apply text-2xl mr-3;
+  }
+
+  .title {
+    @apply text-lg font-medium;
+  }
+</style>

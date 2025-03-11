@@ -4,19 +4,21 @@ import Container from "@components/Container.astro";
 import BackToPrevious from "@components/BackToPrevious.astro";
 
 const { frontmatter } = Astro.props;
+const isAboutPage = Astro.url.pathname === '/about';
+const isCountryPage = Astro.url.pathname.includes('/about/countries/') && Astro.url.pathname !== '/about/countries';
 
-// More robust path handling
-const currentPath = Astro.url.pathname.replace(/\/$/, ''); // Remove trailing slash
-const pathSegments = currentPath.split('/').filter(Boolean);
-const parentPath = pathSegments.length > 1 
-  ? '/' + pathSegments.slice(0, -1).join('/')
-  : '/';
+let backLink = '/about';
+if (isCountryPage) {
+  backLink = '/about/countries';
+}
 ---
 
 <Layout title={frontmatter.title} description={frontmatter.description}>
   <Container>
     <div class="animate">
-      <BackToPrevious href={parentPath}>Назад</BackToPrevious>
+      {!isAboutPage && (
+        <BackToPrevious href={backLink}>{isCountryPage ? 'Все города' : 'Назад'}</BackToPrevious>
+      )}
     </div>
     <article class="prose prose-lg dark:prose-invert max-w-none mt-10">
       <slot />
