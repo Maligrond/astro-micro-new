@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/BlogPost.astro"
+layout: "../../../layouts/BlogPost.astro"
 title: "Моя музыка"
 description: "Музыка, которую я слушаю"
 ---

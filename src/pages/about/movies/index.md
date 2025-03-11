@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/BlogPost.astro"
+layout: "../../../layouts/BlogPost.astro"
 title: "Любимые фильмы и сериалы"
 description: "Кино и сериалы, которые стоит посмотреть"
 ---

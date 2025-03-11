@@ -15,7 +15,7 @@ description: "Немного информации обо мне"
 
 
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-  <a href="/about/favorite-books" class="no-underline not-prose group relative flex flex-nowrap items-center rounded-lg border border-black/15 px-4 py-3 pr-10 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black hover:no-underline focus-visible:bg-black/5 focus-visible:text-black focus-visible:no-underline dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white">
+  <a href="/about/books" class="no-underline not-prose group relative flex flex-nowrap items-center rounded-lg border border-black/15 px-4 py-3 pr-10 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black hover:no-underline focus-visible:bg-black/5 focus-visible:text-black focus-visible:no-underline dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white">
     <span class="text-2xl mr-4">📚</span>
     <span class="font-semibold">Мои любимые книги</span>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute right-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2">
