@@ -38,7 +38,7 @@ const books = files.map(file => {
   };
 }).filter(Boolean);
 
-const sortedBooks = books.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const sortedBooks = books.sort((a, b) => new Date(b?.data?.date || 0).getTime() - new Date(a?.data?.date || 0).getTime());
 ---
 <Layout title="Книги" description="Список книг с рейтингом.">
   <Container>
@@ -50,19 +50,19 @@ const sortedBooks = books.sort((a, b) => new Date(b.data.date).getTime() - new D
       {sortedBooks.map((book) => {
         return (
           <a
-            href={`/books/${book.id}`}
+            href={`/books/${book?.id || ''}`}
             class="block group no-underline"
           >
             <div class="flex items-center justify-between gap-4 py-2 px-3 rounded hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
               <div class="flex items-center gap-3 flex-1 min-w-0">
                 <h3 class="font-medium text-black dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
-                  {book.data.title}
+                  {book?.data?.title || 'Untitled'}
                 </h3>
-                <span class="text-xs text-gray-500 dark:text-gray-400">{book.data.author}</span>
+                <span class="text-xs text-gray-500 dark:text-gray-400">{book?.data?.author || 'Unknown Author'}</span>
               </div>
               <div class="flex items-center gap-2 font-medium text-gray-500 dark:text-gray-400 flex-shrink-0">
                 <span class="group-hover:hidden">
-                  {new Date(book.data.date).toLocaleDateString('ru-RU')}
+                  {new Date(book?.data?.date || '').toLocaleDateString('ru-RU')}
                 </span>
                 <span class="hidden group-hover:inline text-blue-600 dark:text-blue-400">
                   Больше о книге
@@ -71,7 +71,7 @@ const sortedBooks = books.sort((a, b) => new Date(b.data.date).getTime() - new D
                   {Array.from({ length: 5 }).map((_, i) => {
                     return (
                       <span
-                        class={`text-sm ${i < book.data.rating ? 'text-black dark:text-white' : 'text-gray-300 dark:text-gray-600'}`}
+                        class={`text-sm ${i < (book?.data?.rating || 0) ? 'text-black dark:text-white' : 'text-gray-300 dark:text-gray-600'}`}
                       >
                         ★
                       </span>
