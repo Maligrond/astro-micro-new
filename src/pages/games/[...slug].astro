@@ -2,17 +2,16 @@
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import BackToPrevious from "@components/BackToPrevious.astro";
-import { getCollection } from "astro:content";
 import fs from 'fs';
 import path from 'path';
 import { marked } from 'marked';
 
 export async function getStaticPaths() {
-  const booksDir = path.join(process.cwd(), 'src/content/books');
-  const files = fs.readdirSync(booksDir).filter(file => file.endsWith('.md'));
+  const gamesDir = path.join(process.cwd(), 'src/content/games');
+  const files = fs.readdirSync(gamesDir).filter(file => file.endsWith('.md'));
   
-  const books = files.map(file => {
-    const filePath = path.join(booksDir, file);
+  const games = files.map(file => {
+    const filePath = path.join(gamesDir, file);
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const frontmatterMatch = fileContent.match(/^---\n([\s\S]*?)\n---/);
     
@@ -26,7 +25,7 @@ export async function getStaticPaths() {
       const [key, ...valueParts] = line.split(':');
       if (key && valueParts.length > 0) {
         const value = valueParts.join(':').trim();
-        if (key === 'rating') {
+        if (key === 'rating' || key === 'year') {
           data[key] = parseInt(value);
         } else {
           data[key] = value.replace(/^["']|["']$/g, '');
@@ -40,30 +39,30 @@ export async function getStaticPaths() {
     };
   }).filter(Boolean);
   
-  return books.map((book) => ({
-    params: { slug: book!.id },
-    props: book,
+  return games.map((game) => ({
+    params: { slug: game!.id },
+    props: game,
   }));
 }
 
-const book = Astro.props;
-if (!book) {
+const game = Astro.props;
+if (!game) {
   return Astro.redirect("/404");
 }
 
-// Type assertion for book data
-type BookData = {
+// Type assertion for game data
+type GameData = {
   title: string;
-  author: string;
+  year: number;
   date: string;
   rating: number;
   url?: string;
 };
 
-const bookData = book.data as unknown as BookData;
+const gameData = game.data as unknown as GameData;
 
 // Read the markdown content directly
-const contentPath = path.join(process.cwd(), 'src/content/books', `${book.id}.md`);
+const contentPath = path.join(process.cwd(), 'src/content/games', `${game.id}.md`);
 let htmlContent = '';
 try {
   const fileContent = fs.readFileSync(contentPath, 'utf-8');
@@ -73,11 +72,11 @@ try {
   // Convert markdown to HTML
   htmlContent = await marked(markdownContent);
 } catch (e) {
-  htmlContent = '<p>Содержимое книги не найдено.</p>';
+  htmlContent = '<p>Содержимое игры не найдено.</p>';
 }
 ---
 
-<Layout title={bookData.title} description={`Мои впечатления о книге "${bookData.title}" автора ${bookData.author}`}>
+<Layout title={gameData.title} description={`Мои впечатления об игре "${gameData.title}" (${gameData.year})`}>
   <Container>
     <div class="mb-8">
       <BackToPrevious />
@@ -85,27 +84,27 @@ try {
     
     <div class="mb-8">
       <h1 class="text-3xl font-bold text-black dark:text-white mb-2">
-        {bookData.title}
+        {gameData.title}
       </h1>
       <p class="text-lg text-gray-600 dark:text-gray-400 mb-4">
-        {bookData.author}
+        {gameData.year}
       </p>
       
       <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
         <span class="text-sm text-gray-500 dark:text-gray-400">
-          {new Date(bookData.date).toLocaleDateString('ru-RU')}
+          {new Date(gameData.date).toLocaleDateString('ru-RU')}
         </span>
         <span class="flex items-center gap-1">
           <span>Рейтинг:</span>
           {Array.from({ length: 5 }).map((_, i) => (
-            <span class={`${i < bookData.rating ? 'text-black dark:text-white' : 'text-gray-300 dark:text-gray-600'}`}>
+            <span class={`${i < gameData.rating ? 'text-black dark:text-white' : 'text-gray-300 dark:text-gray-600'}`}>
               ★
             </span>
           ))}
         </span>
-        {bookData.url && (
+        {gameData.url && (
           <a
-            href={bookData.url}
+            href={gameData.url}
             target="_blank"
             rel="noopener noreferrer"
             class="text-blue-600 dark:text-blue-400 hover:underline"

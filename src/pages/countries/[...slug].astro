@@ -2,17 +2,16 @@
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import BackToPrevious from "@components/BackToPrevious.astro";
-import { getCollection } from "astro:content";
 import fs from 'fs';
 import path from 'path';
 import { marked } from 'marked';
 
 export async function getStaticPaths() {
-  const booksDir = path.join(process.cwd(), 'src/content/books');
-  const files = fs.readdirSync(booksDir).filter(file => file.endsWith('.md'));
+  const countriesDir = path.join(process.cwd(), 'src/content/countries');
+  const files = fs.readdirSync(countriesDir).filter(file => file.endsWith('.md'));
   
-  const books = files.map(file => {
-    const filePath = path.join(booksDir, file);
+  const countries = files.map(file => {
+    const filePath = path.join(countriesDir, file);
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const frontmatterMatch = fileContent.match(/^---\n([\s\S]*?)\n---/);
     
@@ -40,30 +39,30 @@ export async function getStaticPaths() {
     };
   }).filter(Boolean);
   
-  return books.map((book) => ({
-    params: { slug: book!.id },
-    props: book,
+  return countries.map((country) => ({
+    params: { slug: country!.id },
+    props: country,
   }));
 }
 
-const book = Astro.props;
-if (!book) {
+const country = Astro.props;
+if (!country) {
   return Astro.redirect("/404");
 }
 
-// Type assertion for book data
-type BookData = {
+// Type assertion for country data
+type CountryData = {
   title: string;
-  author: string;
+  country: string;
   date: string;
   rating: number;
-  url?: string;
+  flag: string;
 };
 
-const bookData = book.data as unknown as BookData;
+const countryData = country.data as unknown as CountryData;
 
 // Read the markdown content directly
-const contentPath = path.join(process.cwd(), 'src/content/books', `${book.id}.md`);
+const contentPath = path.join(process.cwd(), 'src/content/countries', `${country.id}.md`);
 let htmlContent = '';
 try {
   const fileContent = fs.readFileSync(contentPath, 'utf-8');
@@ -73,46 +72,37 @@ try {
   // Convert markdown to HTML
   htmlContent = await marked(markdownContent);
 } catch (e) {
-  htmlContent = '<p>Содержимое книги не найдено.</p>';
+  htmlContent = '<p>Содержимое города не найдено.</p>';
 }
 ---
 
-<Layout title={bookData.title} description={`Мои впечатления о книге "${bookData.title}" автора ${bookData.author}`}>
+<Layout title={countryData.title} description={`Мои впечатления о городе "${countryData.title}" в ${countryData.country}`}>
   <Container>
     <div class="mb-8">
       <BackToPrevious />
     </div>
     
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-black dark:text-white mb-2">
-        {bookData.title}
+      <h1 class="text-3xl font-bold text-black dark:text-white mb-2 flex items-center gap-3">
+        <span class="text-4xl">{countryData.flag}</span>
+        {countryData.title}
       </h1>
       <p class="text-lg text-gray-600 dark:text-gray-400 mb-4">
-        {bookData.author}
+        {countryData.country}
       </p>
       
       <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
         <span class="text-sm text-gray-500 dark:text-gray-400">
-          {new Date(bookData.date).toLocaleDateString('ru-RU')}
+          {new Date(countryData.date).toLocaleDateString('ru-RU')}
         </span>
         <span class="flex items-center gap-1">
           <span>Рейтинг:</span>
           {Array.from({ length: 5 }).map((_, i) => (
-            <span class={`${i < bookData.rating ? 'text-black dark:text-white' : 'text-gray-300 dark:text-gray-600'}`}>
+            <span class={`${i < countryData.rating ? 'text-black dark:text-white' : 'text-gray-300 dark:text-gray-600'}`}>
               ★
             </span>
           ))}
         </span>
-        {bookData.url && (
-          <a
-            href={bookData.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            Источник
-          </a>
-        )}
       </div>
     </div>
 

@@ -20,4 +20,37 @@ const books = defineCollection({
   }),
 });
 
-export const collections = { blog, books };
+const games = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    year: z.number(),
+    date: z.string(),
+    rating: z.number().min(1).max(5),
+    url: z.string().optional(),
+  }),
+});
+
+const movies = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    year: z.number(),
+    date: z.string(),
+    rating: z.number().min(1).max(5),
+    url: z.string().optional(),
+  }),
+});
+
+const countries = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    country: z.string(),
+    date: z.string(),
+    rating: z.number().min(1).max(5),
+    flag: z.string(),
+  }),
+});
+
+export const collections = { blog, books, games, movies, countries };
