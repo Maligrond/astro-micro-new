@@ -50,6 +50,7 @@ const countries = defineCollection({
     date: z.string(),
     rating: z.number().min(1).max(5),
     flag: z.string(),
+    favorite: z.boolean().optional(),
   }),
 });
 

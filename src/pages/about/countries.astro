@@ -38,7 +38,24 @@ const countries = files.map(file => {
   };
 }).filter(Boolean);
 
-const sortedCountries = countries.sort((a, b) => new Date(b?.data?.date || 0).getTime() - new Date(a?.data?.date || 0).getTime());
+const sortedCountries = countries.sort((a, b) => {
+  const countryA = a?.data?.country?.toLowerCase() || '';
+  const countryB = b?.data?.country?.toLowerCase() || '';
+  
+  // First sort by country
+  const countryComparison = countryA.localeCompare(countryB);
+  if (countryComparison !== 0) {
+    return countryComparison;
+  }
+  
+  // Then sort by city name within the same country
+  const titleA = a?.data?.title?.toLowerCase() || '';
+  const titleB = b?.data?.title?.toLowerCase() || '';
+  return titleA.localeCompare(titleB);
+});
+
+// Get unique countries for filter
+const uniqueCountries = [...new Set(countries.map(city => city?.data?.country).filter(Boolean))].sort();
 ---
 <Layout title="Города" description="Список посещенных городов с рейтингом.">
   <Container>
@@ -48,16 +65,63 @@ const sortedCountries = countries.sort((a, b) => new Date(b?.data?.date || 0).ge
       <h1>Посещённые города</h1>
     </div>
     
-    <p class="text-lg text-gray-600 dark:text-gray-400 mb-12">
+    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
       Города, в которых я побывал.
     </p>
+
+    <!-- Filter Toggle Button -->
+    <div class="mb-8">
+      <button
+        onclick="toggleFilters()"
+        class="px-3 py-2 text-sm rounded border border-black/15 bg-white hover:bg-black/5 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 transition-colors"
+      >
+        <span class="mr-2">🌍</span>
+        Фильтр по странам
+      </button>
+      
+      <!-- Country Flag Filters (Hidden by default) -->
+      <div id="country-filters" class="hidden mt-4">
+        <div class="flex flex-wrap gap-2">
+          <button
+            onclick="filterByCountry('')"
+            class="country-filter active px-3 py-2 text-sm rounded border border-black/15 bg-black/5 text-black hover:bg-black/10 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 transition-colors"
+            data-country=""
+          >
+            Все
+          </button>
+          <button
+            onclick="filterByFavorites()"
+            class="favorite-filter px-3 py-2 text-lg rounded border border-black/15 bg-white hover:bg-black/5 dark:border-white/20 dark:bg-white/5 dark:hover:bg-white/10 transition-colors"
+            title="Любимые города"
+          >
+            ★
+          </button>
+          {uniqueCountries.map((countryName) => {
+            const countryCity = countries.find(city => city?.data?.country === countryName);
+            return countryCity ? (
+              <button
+                onclick={`filterByCountry('${countryName}')`}
+                class="country-filter px-3 py-2 text-lg rounded border border-black/15 bg-white hover:bg-black/5 dark:border-white/20 dark:bg-white/5 dark:hover:bg-white/10 transition-colors"
+                data-country={countryName}
+                title={countryName}
+              >
+                {countryCity.data?.flag}
+              </button>
+            ) : null;
+          })}
+        </div>
+      </div>
+    </div>
+
     <!-- Countries List -->
     <div class="space-y-1">
       {sortedCountries.map((country) => {
         return (
           <a
             href={`/countries/${country?.id || ''}`}
-            class="block group no-underline"
+            class="city-item block group no-underline"
+            data-country={country?.data?.country}
+            data-favorite={country?.data?.favorite ? 'true' : 'false'}
           >
             <div class="flex items-center justify-between gap-4 py-2 px-3 rounded hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
               <div class="flex items-center gap-3 flex-1 min-w-0">
@@ -68,22 +132,11 @@ const sortedCountries = countries.sort((a, b) => new Date(b?.data?.date || 0).ge
                 <span class="text-xs text-gray-500 dark:text-gray-400">({country?.data?.country || 'Unknown Country'})</span>
               </div>
               <div class="flex items-center gap-2 font-medium text-gray-500 dark:text-gray-400 flex-shrink-0">
-                <span class="group-hover:hidden">
-                  {new Date(country?.data?.date || '').toLocaleDateString('ru-RU')}
-                </span>
+                {country?.data?.favorite && (
+                  <span class="text-yellow-500 text-lg">★</span>
+                )}
                 <span class="hidden group-hover:inline text-blue-600 dark:text-blue-400">
                   Больше о городе
-                </span>
-                <span class="flex items-center ml-2">
-                  {Array.from({ length: 5 }).map((_, i) => {
-                    return (
-                      <span
-                        class={`text-sm ${i < (country?.data?.rating || 0) ? 'text-black dark:text-white' : 'text-gray-300 dark:text-gray-600'}`}
-                      >
-                        ★
-                      </span>
-                    );
-                  })}
                 </span>
               </div>
             </div>
@@ -91,5 +144,78 @@ const sortedCountries = countries.sort((a, b) => new Date(b?.data?.date || 0).ge
         );
       })}
     </div>
+
+    <script is:inline>
+      function toggleFilters() {
+        const filtersDiv = document.getElementById('country-filters');
+        if (filtersDiv) {
+          filtersDiv.classList.toggle('hidden');
+        }
+      }
+
+      function filterByCountry(selectedCountry) {
+        const cityItems = document.querySelectorAll('.city-item');
+        const filterButtons = document.querySelectorAll('.country-filter');
+        const favoriteButton = document.querySelector('.favorite-filter');
+        
+        // Reset favorite filter
+        favoriteButton.classList.remove('active', 'bg-black/5', 'dark:bg-white/10');
+        favoriteButton.classList.add('bg-white', 'dark:bg-white/5');
+        
+        // Update button states
+        filterButtons.forEach(button => {
+          const buttonCountry = button.getAttribute('data-country') || '';
+          if (buttonCountry === selectedCountry) {
+            button.classList.add('active');
+            button.classList.remove('bg-white', 'dark:bg-white/5');
+            button.classList.add('bg-black/5', 'dark:bg-white/10');
+          } else {
+            button.classList.remove('active');
+            button.classList.remove('bg-black/5', 'dark:bg-white/10');
+            button.classList.add('bg-white', 'dark:bg-white/5');
+          }
+        });
+        
+        // Filter cities
+        cityItems.forEach(item => {
+          const itemCountry = item.getAttribute('data-country') || '';
+          
+          if (selectedCountry === '' || itemCountry === selectedCountry) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      }
+
+      function filterByFavorites() {
+        const cityItems = document.querySelectorAll('.city-item');
+        const filterButtons = document.querySelectorAll('.country-filter');
+        const favoriteButton = document.querySelector('.favorite-filter');
+        
+        // Reset country filters
+        filterButtons.forEach(button => {
+          button.classList.remove('active', 'bg-black/5', 'dark:bg-white/10');
+          button.classList.add('bg-white', 'dark:bg-white/5');
+        });
+        
+        // Activate favorite filter
+        favoriteButton.classList.add('active');
+        favoriteButton.classList.remove('bg-white', 'dark:bg-white/5');
+        favoriteButton.classList.add('bg-black/5', 'dark:bg-white/10');
+        
+        // Filter cities
+        cityItems.forEach(item => {
+          const isFavorite = item.getAttribute('data-favorite') === 'true';
+          
+          if (isFavorite) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      }
+    </script>
+
   </Container>
 </Layout>
